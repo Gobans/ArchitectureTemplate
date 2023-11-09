@@ -15,19 +15,32 @@ public struct PresentationAssembly: Assembly {
     let coordinator: Coordinator
     
     public func assemble(container: Container) {
-        // ------------------------ Common ------------------------
-        // Example
-        container.register(ExampleViewModel.self) { resolver in
+        // ExampleTab1
+        container.register(ExampleTab1ViewModel.self) { resolver in
             let useCase = resolver.resolve(ExampleUseCase.self)!
-            return ExampleViewModel(exampleUseCase: useCase, coordinator: coordinator)
+            return ExampleTab1ViewModel(exampleUseCase: useCase, coordinator: coordinator)
         }
-        container.register(ExampleView.self) { resolver in
-            let viewModel = resolver.resolve(ExampleViewModel.self)!
-            return ExampleView(viewModel: viewModel)
+        container.register(ExampleTab1View.self) { resolver in
+            let viewModel = resolver.resolve(ExampleTab1ViewModel.self)!
+            return ExampleTab1View(viewModel: viewModel)
         }
+        // ExampleTab2
+        container.register(ExampleTab2ViewModel.self) { resolver in
+            let useCase = resolver.resolve(ExampleUseCase.self)!
+            return ExampleTab2ViewModel(exampleUseCase: useCase, coordinator: coordinator)
+        }
+        container.register(ExampleTab2View.self) { resolver in
+            let viewModel = resolver.resolve(ExampleTab2ViewModel.self)!
+            return ExampleTab2View(viewModel: viewModel)
+        }
+        container.register(Example2SubView.self) { _ in
+            return Example2SubView()
+        }
+        // RootTab
         container.register(RootTabView.self) { resolver in
-            let exampleView = resolver.resolve(ExampleView.self)!
-            return RootTabView(tab1: exampleView)
+            let tab1 = resolver.resolve(ExampleTab1View.self)!
+            let tab2 = resolver.resolve(ExampleTab2View.self)!
+            return RootTabView(tab1: tab1, tab2: tab2)
         }
     }
     

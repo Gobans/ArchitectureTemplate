@@ -10,11 +10,13 @@ import SwiftUI
 
 public struct RootTabView: View {
     
-    private let tab1: ExampleView
+    private let tab1: ExampleTab1View
+    private let tab2: ExampleTab2View
     @State private var selection: Int = 1
     
-    public init(tab1: ExampleView) {
+    public init(tab1: ExampleTab1View, tab2: ExampleTab2View) {
         self.tab1 = tab1
+        self.tab2 = tab2
     }
     
     public var body: some View {
@@ -27,10 +29,18 @@ public struct RootTabView: View {
                     }
                 }
                 .tag(1)
+            tab2
+                .tabItem {
+                    VStack {
+                        Image(systemName: "pentagon.fill")
+                        Text("Tab2")
+                    }
+                }
+                .tag(2)
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            UITabBar.appearance().backgroundColor = UIColor(.orange)
+            UITabBar.appearance().backgroundColor = UIColor(.white)
         }
     }
 }

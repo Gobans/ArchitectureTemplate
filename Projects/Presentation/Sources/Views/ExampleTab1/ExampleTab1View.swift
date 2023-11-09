@@ -9,17 +9,17 @@
 import SwiftUI
 import Domain
 
-public struct ExampleView: View {
+public struct ExampleTab1View: View {
     
-    @ObservedObject private(set) var viewModel: ExampleViewModel
+    @ObservedObject private(set) var viewModel: ExampleTab1ViewModel
     
-    public init(viewModel: ExampleViewModel) {
+    public init(viewModel: ExampleTab1ViewModel) {
         self.viewModel = viewModel
     }
     
     public var body: some View {
         ZStack {
-            Color.white
+            Color.BG_Default
             VStack {
                 if viewModel.isLoading {
                     ProgressView()

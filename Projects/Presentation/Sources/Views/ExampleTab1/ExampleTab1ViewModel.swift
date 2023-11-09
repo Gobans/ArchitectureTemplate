@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import Domain
 
-final public class ExampleViewModel: BaseViewModel {
+final public class ExampleTab1ViewModel: BaseViewModel {
     
     @Published private(set) var slip: SlipVO = SlipVO(id: 0, advice: "Empty")
     @Published private(set) var isLoading: Bool = false

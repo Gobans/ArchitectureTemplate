@@ -10,8 +10,10 @@ import SwiftUI
 import Domain
 
 public enum AppScene: Identifiable, Hashable {
-    case exampleScene
+    case example1Scene
+    case example2Scene
     case rootTabScene
+    case example2SubView
     
     public var id: Self {
         return self

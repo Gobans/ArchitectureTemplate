@@ -6,7 +6,6 @@
 //  Copyright © 2023 Lito. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
 import Presentation
 import Domain
@@ -49,8 +48,12 @@ public class Coordinator: ObservableObject, CoordinatorProtocol {
     @ViewBuilder
     public func buildScene(scene: AppScene) -> some View {
         switch scene {
-        case .exampleScene:
-            injector?.resolve(ExampleView.self)
+        case .example1Scene:
+            injector?.resolve(ExampleTab1View.self)
+        case .example2Scene:
+            injector?.resolve(ExampleTab2View.self)
+        case .example2SubView:
+            injector?.resolve(Example2SubView.self)
         case .rootTabScene:
             injector?.resolve(RootTabView.self)
         }
