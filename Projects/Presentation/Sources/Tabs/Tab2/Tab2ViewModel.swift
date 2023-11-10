@@ -10,17 +10,17 @@ import Foundation
 import Combine
 import Domain
 
-final public class ExampleTab2ViewModel: BaseViewModel {
+final public class Tab2ViewModel {
     
     private let exampleUseCase: ExampleUseCase
+    public weak var tab2Coordinator: Tab2Coordinator?
     
-    public init(exampleUseCase: ExampleUseCase, coordinator: CoordinatorProtocol) {
+    public init(exampleUseCase: ExampleUseCase) {
         self.exampleUseCase = exampleUseCase
-        super.init(coordinator: coordinator)
     }
     
     public func moveToExampleSubView() {
-        self.coordinator.push(.example2SubView)
+//        self.tab2Coordinator
     }
     
 }

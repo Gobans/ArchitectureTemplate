@@ -12,35 +12,27 @@ import Presentation
 
 public struct PresentationAssembly: Assembly {
     
-    let coordinator: Coordinator
-    
     public func assemble(container: Container) {
         // ExampleTab1
-        container.register(ExampleTab1ViewModel.self) { resolver in
+        container.register(Tab1ViewModel.self) { resolver in
             let useCase = resolver.resolve(ExampleUseCase.self)!
-            return ExampleTab1ViewModel(exampleUseCase: useCase, coordinator: coordinator)
+            return Tab1ViewModel(exampleUseCase: useCase)
         }
-        container.register(ExampleTab1View.self) { resolver in
-            let viewModel = resolver.resolve(ExampleTab1ViewModel.self)!
-            return ExampleTab1View(viewModel: viewModel)
+        container.register(Tab1ViewController.self) { resolver in
+            let viewModel = resolver.resolve(Tab1ViewModel.self)!
+            return Tab1ViewController(viewModel: viewModel)
         }
         // ExampleTab2
-        container.register(ExampleTab2ViewModel.self) { resolver in
+        container.register(Tab2ViewModel.self) { resolver in
             let useCase = resolver.resolve(ExampleUseCase.self)!
-            return ExampleTab2ViewModel(exampleUseCase: useCase, coordinator: coordinator)
+            return Tab2ViewModel(exampleUseCase: useCase)
         }
-        container.register(ExampleTab2View.self) { resolver in
-            let viewModel = resolver.resolve(ExampleTab2ViewModel.self)!
-            return ExampleTab2View(viewModel: viewModel)
+        container.register(Tab2ViewController.self) { resolver in
+            let viewModel = resolver.resolve(Tab2ViewModel.self)!
+            return Tab2ViewController(viewModel: viewModel)
         }
         container.register(Example2SubView.self) { _ in
             return Example2SubView()
-        }
-        // RootTab
-        container.register(RootTabView.self) { resolver in
-            let tab1 = resolver.resolve(ExampleTab1View.self)!
-            let tab2 = resolver.resolve(ExampleTab2View.self)!
-            return RootTabView(tab1: tab1, tab2: tab2)
         }
     }
     

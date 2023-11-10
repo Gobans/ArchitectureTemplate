@@ -10,26 +10,26 @@ import Foundation
 import Combine
 import Domain
 
-final public class ExampleTab1ViewModel: BaseViewModel {
+final public class Tab1ViewModel {
     
     @Published private(set) var slip: SlipVO = SlipVO(id: 0, advice: "Empty")
     @Published private(set) var isLoading: Bool = false
     
     private let exampleUseCase: ExampleUseCase
+    public weak var tab1Coordinator: Tab1Coordinator?
     
-    public init(exampleUseCase: ExampleUseCase, coordinator: CoordinatorProtocol) {
+    public init(exampleUseCase: ExampleUseCase) {
         self.exampleUseCase = exampleUseCase
-        super.init(coordinator: coordinator)
     }
     
     func onChangeQuoteButtonClicked() {
-        isLoading = true
-        exampleUseCase.load()
-            .receive(on: DispatchQueue.main)
-            .sinkToResultWithErrorHandler({ slipVO in
-                self.slip = slipVO
-                self.isLoading = false
-            }, errorHandler: errorHandler)
-            .store(in: cancelBag)
+//        isLoading = true
+//        exampleUseCase.load()
+//            .receive(on: DispatchQueue.main)
+//            .sinkToResultWithErrorHandler({ slipVO in
+//                self.slip = slipVO
+//                self.isLoading = false
+//            }, errorHandler: errorHandler)
+//            .store(in: cancelBag)
     }
 }

@@ -6,14 +6,31 @@
 //  Copyright © 2023 Lito. All rights reserved.
 //
 
-import SwiftUI
-import Combine
-import Domain
+import UIKit
 
-public protocol CoordinatorProtocol {
-    func push(_ scene: AppScene)
-    func pop()
-    func popToRoot()
-    func present(sheet: AppScene)
-    func dismissSheet()
+public enum CoordinatorType {
+    case app
+    case tabbar
+    case tab1
+    case tab2
+}
+
+public protocol Coordinator: AnyObject {
+    var childCoordinators: [Coordinator] { get set }
+    var navigationController: UINavigationController { get set }
+    var type: CoordinatorType { get }
+    var finishDelegate: CoordinatorFinishDelegate? { get set }
+    func start()
+    func finish()
+}
+
+extension Coordinator {
+    public func finish() {
+        childCoordinators.removeAll()
+        finishDelegate?.coordinatorDidFinish(childCoordinator: self)
+    }
+}
+
+public protocol CoordinatorFinishDelegate: AnyObject {
+    func coordinatorDidFinish(childCoordinator: Coordinator)
 }
