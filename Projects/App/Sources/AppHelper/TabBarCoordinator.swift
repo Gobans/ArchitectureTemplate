@@ -67,7 +67,7 @@ final class DefaultTabBarController: TabBarCoordinator {
         case .tab1:
             return UITabBarItem(title: page.rawValue, image: UIImage(systemName: "hexagon.fill"), tag: page.pageOrderNumber())
         case .tab2:
-            return UITabBarItem(title: page.rawValue, image: UIImage(named: "pentagon.fill"), tag: page.pageOrderNumber())
+            return UITabBarItem(title: page.rawValue, image: UIImage(systemName: "pentagon.fill"), tag: page.pageOrderNumber())
         }
         
     }
@@ -77,7 +77,9 @@ final class DefaultTabBarController: TabBarCoordinator {
         switch page {
         case .tab1:
             let tab1ViewController = dependency.injector.resolve(Tab1ViewController.self)
+            let tab1SubViewController = dependency.injector.resolve(Tab1SubViewController.self)
             let dependency = DefaultTab1Coordinator.Dependency.init(tab1ViewController: tab1ViewController,
+                                                                    tab1SubViewController: tab1SubViewController,
                                                                     navigationController: tabNavigationController,
                                                                     finishDelegate: self)
             let tab1Coordinator = DefaultTab1Coordinator(dependency: dependency)

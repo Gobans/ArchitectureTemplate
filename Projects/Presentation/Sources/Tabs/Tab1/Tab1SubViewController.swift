@@ -1,5 +1,5 @@
 //
-//  Tab1ViewController.swift
+//  Tab1SubViewController.swift
 //  Presentation
 //
 //  Created by Lee Myeonghwan on 2023/11/10.
@@ -9,7 +9,8 @@
 import UIKit
 import SwiftUI
 
-public class Tab1ViewController: UIViewController {
+public class Tab1SubViewController: UIViewController {
+    
     let viewModel: Tab1ViewModel
     
     public init(viewModel: Tab1ViewModel) {
@@ -22,7 +23,7 @@ public class Tab1ViewController: UIViewController {
         
         // 레이블 생성
         let label = UILabel()
-        label.text = "Go to Next page"
+        label.text = "Pop to previous page"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .black
@@ -51,7 +52,7 @@ public class Tab1ViewController: UIViewController {
     
     @objc func buttonTapped() {
         // 버튼이 클릭되었을 때의 동작을 정의합니다.
-        viewModel.tab1Coordinator?.showTab1SubViewControlller()
+        viewModel.tab1Coordinator?.pop()
     }
     
     required init?(coder: NSCoder) {

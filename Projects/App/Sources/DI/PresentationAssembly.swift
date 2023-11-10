@@ -18,9 +18,16 @@ public struct PresentationAssembly: Assembly {
             let useCase = resolver.resolve(ExampleUseCase.self)!
             return Tab1ViewModel(exampleUseCase: useCase)
         }
+        .inObjectScope(.container)
+        
         container.register(Tab1ViewController.self) { resolver in
             let viewModel = resolver.resolve(Tab1ViewModel.self)!
             return Tab1ViewController(viewModel: viewModel)
+        }
+        
+        container.register(Tab1SubViewController.self) { resolver in
+            let viewModel = resolver.resolve(Tab1ViewModel.self)!
+            return Tab1SubViewController(viewModel: viewModel)
         }
         // ExampleTab2
         container.register(Tab2ViewModel.self) { resolver in
@@ -30,9 +37,6 @@ public struct PresentationAssembly: Assembly {
         container.register(Tab2ViewController.self) { resolver in
             let viewModel = resolver.resolve(Tab2ViewModel.self)!
             return Tab2ViewController(viewModel: viewModel)
-        }
-        container.register(Example2SubView.self) { _ in
-            return Example2SubView()
         }
     }
     

@@ -12,9 +12,6 @@ import Domain
 
 final public class Tab1ViewModel {
     
-    @Published private(set) var slip: SlipVO = SlipVO(id: 0, advice: "Empty")
-    @Published private(set) var isLoading: Bool = false
-    
     private let exampleUseCase: ExampleUseCase
     public weak var tab1Coordinator: Tab1Coordinator?
     
