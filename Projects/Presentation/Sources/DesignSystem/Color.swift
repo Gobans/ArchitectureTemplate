@@ -6,26 +6,22 @@
 //  Copyright © 2023 gb. All rights reserved.
 //
 
-import SwiftUI
+import UIKit
 
 public enum AppColor: String {
     case BG_Default
 }
 
-extension Color {
+extension UIColor {
     
-    /// hex: #FAFAFA
     static let BG_Default = makeColor(.BG_Default)
+    
 }
 
-extension Color {
+extension UIColor {
     
-    static func makeColor(_ color: AppColor) -> Color {
-        return Color(color.rawValue, bundle: Bundle.module)
+    static func makeColor(_ color: AppColor) -> UIColor {
+        return UIColor(named: color.rawValue, in: Bundle.module, compatibleWith: nil) ?? UIColor()
     }
-    
-}
 
-extension ShapeStyle where Self == Color {
-    static var BG_Default: Color { Color.BG_Default }
 }

@@ -7,47 +7,60 @@
 //
 
 import UIKit
-import SwiftUI
 
-public class Tab1SubViewController: UIViewController {
+public class Tab1SubViewController: BaseViewController {
     
     let viewModel: Tab1ViewModel
     
-    public init(viewModel: Tab1ViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    public override func viewDidLoad() {
-        view.backgroundColor = UIColor(Color.BG_Default)
-        
-        // 레이블 생성
+    private let label: UILabel = {
         let label = UILabel()
         label.text = "Pop to previous page"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .black
-        
-        // 버튼 생성
+        return label
+    }()
+    
+    private let button: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("클릭하세요", for: .normal)
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        
-        // 레이블 및 버튼을 스택 뷰에 추가
-        let stackView = UIStackView(arrangedSubviews: [label, button])
+        return button
+    }()
+    
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 20
         stackView.distribution = .fillEqually
         stackView.alignment = .center
-        
-        // 스택 뷰를 뷰 컨트롤러의 루트 뷰로 설정
+        return stackView
+    }()
+    
+    public init(viewModel: Tab1ViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
+    
+    public override func setupViewProperty() {
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    }
+    
+    public override func setupHierarchy() {
+        stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(button)
         view.addSubview(stackView)
+    }
+    
+    public override func setupLayout() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     @objc func buttonTapped() {

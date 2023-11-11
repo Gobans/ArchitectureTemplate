@@ -6,7 +6,6 @@
 //  Copyright © 2023 Lito. All rights reserved.
 //
 
-import SwiftUI
 import Domain
 
 public enum AppScene: Identifiable, Hashable {
