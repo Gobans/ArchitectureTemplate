@@ -51,7 +51,7 @@ public class Tab1ViewController: UIViewController {
     
     @objc func buttonTapped() {
         // 버튼이 클릭되었을 때의 동작을 정의합니다.
-        viewModel.tab1Coordinator?.showTab1SubViewControlller()
+        viewModel.moveToSubViewButtonClicked()
     }
     
     required init?(coder: NSCoder) {

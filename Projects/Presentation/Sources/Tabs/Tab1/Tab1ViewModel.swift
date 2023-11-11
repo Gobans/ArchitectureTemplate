@@ -19,14 +19,11 @@ final public class Tab1ViewModel {
         self.exampleUseCase = exampleUseCase
     }
     
-    func onChangeQuoteButtonClicked() {
-//        isLoading = true
-//        exampleUseCase.load()
-//            .receive(on: DispatchQueue.main)
-//            .sinkToResultWithErrorHandler({ slipVO in
-//                self.slip = slipVO
-//                self.isLoading = false
-//            }, errorHandler: errorHandler)
-//            .store(in: cancelBag)
+    func moveToSubViewButtonClicked() {
+        tab1Coordinator?.push(.tab1SubView)
+    }
+    
+    func popButtonClicked() {
+        tab1Coordinator?.pop()
     }
 }

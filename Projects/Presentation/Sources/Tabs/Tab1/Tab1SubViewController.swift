@@ -52,7 +52,7 @@ public class Tab1SubViewController: UIViewController {
     
     @objc func buttonTapped() {
         // 버튼이 클릭되었을 때의 동작을 정의합니다.
-        viewModel.tab1Coordinator?.pop()
+        viewModel.popButtonClicked()
     }
     
     required init?(coder: NSCoder) {

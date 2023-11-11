@@ -10,7 +10,7 @@ import UIKit
 
 public protocol Tab1Coordinator: Coordinator {
     func showExample1TabFlow()
-    func showTab1SubViewControlller()
+    func push(_ scene: Tab1Scenes)
     func pop()
 }
 
@@ -55,8 +55,13 @@ public class DefaultTab1Coordinator: Tab1Coordinator {
         navigationController.pushViewController(dependency.tab1ViewController, animated: true)
     }
     
-    public func showTab1SubViewControlller() {
-        navigationController.pushViewController(dependency.tab1SubViewController, animated: true)
+    public func push(_ scene: Tab1Scenes) {
+        switch scene {
+        case .tab1View:
+            navigationController.pushViewController(dependency.tab1ViewController, animated: true)
+        case .tab1SubView:
+            navigationController.pushViewController(dependency.tab1SubViewController, animated: true)
+        }
     }
     
     public func pop() {
