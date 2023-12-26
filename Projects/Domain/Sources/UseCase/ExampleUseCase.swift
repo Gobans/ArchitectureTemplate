@@ -1,8 +1,8 @@
-import Combine
+import RxSwift
 import Foundation
 
 public protocol ExampleUseCase {
-    func load() -> AnyPublisher<SlipVO, Error>
+    func load() -> Single<SlipVO>
 }
 
 public final class DefaultExampleUseCase: ExampleUseCase {
@@ -13,21 +13,7 @@ public final class DefaultExampleUseCase: ExampleUseCase {
         self.repository = repository
     }
     
-    public func load() -> AnyPublisher<SlipVO, Error> {
+    public func load() -> Single<SlipVO> {
         repository.loadSlip()
     }
 }
-
-#if DEBUG
-public final class StubExampleUseCase: ExampleUseCase {
-    
-    public init() {}
-    
-    public func load() -> AnyPublisher<SlipVO, Error> {
-        Just(SlipVO.mock)
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
-    }
-    
-}
-#endif

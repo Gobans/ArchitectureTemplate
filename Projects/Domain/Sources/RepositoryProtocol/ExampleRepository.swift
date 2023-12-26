@@ -6,8 +6,8 @@
 //  Copyright © 2023 Lito. All rights reserved.
 //
 
-import Combine
+import RxSwift
 
 public protocol ExampleRepository {
-    func loadSlip() -> AnyPublisher<SlipVO, Error>
+    func loadSlip() -> Single<SlipVO>
 }

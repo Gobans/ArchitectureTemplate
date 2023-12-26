@@ -7,19 +7,23 @@
 //
 
 import Combine
+import Moya
+import RxSwift
+import RxMoya
 
 public protocol ExampleDataSource {
-    func loadMaxim() -> AnyPublisher<SlipDTO, Error>
+    func loadMaxim() -> Single<SlipDTO>
 }
 
 final public class DefaultExampleDataSource: ExampleDataSource {
     
     public init() {}
     
-    private let moyaProvider = MoyaWrapper<ExampleAPI>()
+    private let moyaProvider = MoyaProvider<ExampleAPI>()
     
-    public func loadMaxim() -> AnyPublisher<SlipDTO, Error> {
-        moyaProvider.call(target: .oneSlip)
+    public func loadMaxim() -> Single<SlipDTO> {
+        moyaProvider.rx.request(.oneSlip)
+            .map(SlipDTO.self)
     }
     
 }

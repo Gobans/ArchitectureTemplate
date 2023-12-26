@@ -6,8 +6,8 @@
 //  Copyright © 2023 Lito. All rights reserved.
 //
 
-import Combine
 import Domain
+import RxSwift
 
 final public class DefaultExampleRepository: ExampleRepository {
     private let dataSource: ExampleDataSource
@@ -16,9 +16,8 @@ final public class DefaultExampleRepository: ExampleRepository {
         self.dataSource = dataSource
     }
     
-    public func loadSlip() -> AnyPublisher<SlipVO, Error> {
+    public func loadSlip() -> Single<SlipVO> {
         dataSource.loadMaxim()
             .map { $0.toVO() }
-            .eraseToAnyPublisher()
     }
 }

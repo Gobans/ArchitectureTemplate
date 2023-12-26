@@ -7,26 +7,35 @@
 //
 
 import UIKit
+import ReactorKit
+import RxCocoa
+import RxSwift
 
-public class Tab2ViewController: BaseViewController {
-    let viewModel: Tab2ViewModel
+public class Tab2ViewController: BaseViewController, View {
     
-    public init(viewModel: Tab2ViewModel) {
-        self.viewModel = viewModel
+    public typealias Reactor = Tab2ViewReactor
+    
+    public override init() {
         super.init()
     }
     
-    public override func setupBind() {
-        viewModel.$adviceQuote
-            .compactMap { $0.advice }
-            .assign(to: \.text, on: label)
-            .store(in: &cancelBag)
-        viewModel.loadingSubject
-            .sink { _ in
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-            }
-            .store(in: &cancelBag)
+    public func bind(reactor: Tab2ViewReactor) {
+        
+        button.rx.tap
+            .map { Reactor.Action.loadQuote }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.isLoading }
+            .distinctUntilChanged()
+            .bind(to: activityIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.quote }
+            .distinctUntilChanged()
+            .bind(to: label.rx.text)
+            .disposed(by: disposeBag)
+        
     }
     
     private var label: UILabel = {
@@ -61,10 +70,6 @@ public class Tab2ViewController: BaseViewController {
         return activityIndicator
     }()
     
-    public override func setupViewProperty() {
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-    }
-    
     public override func setupHierarchy() {
         stackView.addArrangedSubview(label)
         stackView.addArrangedSubview(button)
@@ -93,13 +98,6 @@ public class Tab2ViewController: BaseViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc func buttonTapped() {
-        // 버튼이 클릭되었을 때의 동작을 정의합니다.
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        viewModel.changeQuote()
     }
     
 }

@@ -9,6 +9,7 @@
 import Swinject
 import Domain
 import Presentation
+import ReactorKit
 
 public struct PresentationAssembly: Assembly {
     
@@ -30,13 +31,14 @@ public struct PresentationAssembly: Assembly {
             return Tab1SubViewController(viewModel: viewModel)
         }
         // ExampleTab2
-        container.register(Tab2ViewModel.self) { resolver in
+        container.register(Tab2ViewReactor.self) { resolver in
             let useCase = resolver.resolve(ExampleUseCase.self)!
-            return Tab2ViewModel(exampleUseCase: useCase)
+            return Tab2ViewReactor(exampleUseCase: useCase)
         }
         container.register(Tab2ViewController.self) { resolver in
-            let viewModel = resolver.resolve(Tab2ViewModel.self)!
-            return Tab2ViewController(viewModel: viewModel)
+            let vc = Tab2ViewController()
+            vc.reactor = resolver.resolve(Tab2ViewReactor.self)!
+            return vc
         }
     }
     

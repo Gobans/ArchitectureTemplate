@@ -35,7 +35,7 @@ public class DefaultTab2Coordinator: Tab2Coordinator {
         self.dependency = dependency
         self.navigationController = dependency.navigationController
         self.finishDelegate = dependency.finishDelegate
-        dependency.tab2ViewController.viewModel.tab2Coordinator = self
+//        dependency.tab2ViewController.viewModel.tab2Coordinator = self
     }
     
     public func start() {

@@ -8,6 +8,7 @@
 
 import UIKit
 import Combine
+import ReactorKit
 
 public protocol BaseViewItemProtocol: AnyObject {
     /// view property 설정 - ex ) view.backgroundColor = .white
@@ -29,6 +30,9 @@ public protocol BaseViewControllerProtocol: AnyObject, BaseViewItemProtocol {
 }
 
 open class BaseViewController: UIViewController, BaseViewControllerProtocol {
+    
+    public var disposeBag = DisposeBag()
+    
     public var cancelBag = Set<AnyCancellable>()
     
     public init() {
